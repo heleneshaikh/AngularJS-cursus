@@ -18,10 +18,11 @@
   <body ng-controller="appCtrl">
    <div class="container">
      <h1 class="page-header">Demo app + {{ver}}</h1>
-      <p>Parent: {{random}}</p>
-
+      <p>Parent: {{viewdata.random}}</p>
     <div ng-controller="otherCtrl">
-      <p>Child: {{random}}</p> <!-- inherits from parent! -->
+      <p>Child: {{viewdata.random}}</p> <!-- inherits from parent! -->
+      <button ng-click="generate()" class="btn btn-primary">New random</button>
+      
     </div>
 
 

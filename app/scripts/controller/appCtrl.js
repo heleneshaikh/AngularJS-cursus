@@ -5,10 +5,11 @@
     
     function AppCtrl($scope, appVersion) {
         $scope.ver = appVersion;
-        $scope.random = Math.random();
-    }
+        $scope.viewdata = {
+        	random : Math.random()
+        };
 
-
+       }
 
     angular.module('demoApp')
     .controller('appCtrl', AppCtrl);
