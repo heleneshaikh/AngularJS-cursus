@@ -1,3 +1,5 @@
+'use strict';
+
 (function() { //always use immediate functions 
 	//everything gets done in separate modules. Normally not much code in main module
 
