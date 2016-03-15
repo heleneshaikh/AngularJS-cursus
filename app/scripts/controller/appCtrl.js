@@ -2,7 +2,7 @@
 
 (function() {
 
-  function AppCtrl(appVersion, $rootScope) { 
+  function AppCtrl(appVersion, $rootScope, $location) {
     var _this = this;
 
       _this.ver = appVersion;
@@ -12,7 +12,12 @@
       $rootScope.$on('newRandom', function(event, arg) { //listens to newRandom event listener
         _this.viewdata.random = arg.random;
       });
+
+      _this.gotoForm = function() {
+        $location.path('/form');
+      };
      }
+
 
   angular.module('demoApp')
   .controller('appCtrl', AppCtrl);
