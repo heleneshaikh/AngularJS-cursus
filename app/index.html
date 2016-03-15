@@ -10,26 +10,52 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <!-- endbower -->
+    <script src="bower_components/angular-i18n/angular-locale nl-be.js"></script>
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-controller="appCtrl">
+
+  <body ng-controller="appCtrl as appCtrl">
    <div class="container">
-     <h1 class="page-header">Demo app + {{ver}}</h1>
-      <p>Parent: {{viewdata.random}}</p>
-    <div ng-controller="otherCtrl">
-      <p>Child: {{viewdata.random}}</p> <!-- inherits from parent! -->
-      <button ng-click="generate()" class="btn btn-primary">New random</button>
-      
-    </div>
+     <h1 class="page-header">Demo app + {{ ::appCtrl.ver}}</h1>
+     <p>{{ 2545 | currency }} </p>
+     <p>App ctrl: {{appCtrl.viewdata.random}}</p>
 
 
+     <div ng-controller="otherCtrl as otherCtrl">
+       <p>Child: {{otherCtrl.viewdata.random}}</p>
+
+       <button ng-click="otherCtrl.generate()" class="btn btn-primary">New random</button>
+
+       <form class="form" novalidate name="addForm" ng-submit="otherCtrl.addUser(newUser)">
+         <input type="text" class="form-control" ng-minLength="3" ng-maxLength="30" name="txtName" ng-model="newUser.name" required placeholder="Name" />
+         <input type="email" class="form-control"  name="txtEmail" ng-model="newUser.email" required placeholder="Email"/>
+         <button type="submit" class="btn btn-primary btn-block" ng-disabled="addForm.$invalid">add</button>
+         <!-- disable add button as long as email and name are $invalid -->
+       </form>
+
+       <button ng-click="otherCtrl.hideTable()" ng-class="{ 'btn-success': otherCtrl.hide, 'btn-warning': !otherCtrl.hide }" class="btn">Hide table</button>
+
+        <table class="table" ng-hide="otherCtrl.hide">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="user in otherCtrl.users">
+              <td> {{ $index + 1 }}</td> <!-- from ng-repeat: $odd, $even, $first, etc-->
+              <td> {{ user.name | uppercase }}</td>
+              <td> {{ user.email }}</td>
+            </tr>
+          </tbody>
+        </table>
+     </div>
    </div>
-
-
-
 
 
 
@@ -41,6 +67,7 @@
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -49,6 +76,7 @@
 <script src="scripts/app.js" type="text/javascript"></script>
 <script src="scripts/controller/otherCtrl.js" type="text/javascript"></script>
 <script src="scripts/controller/appCtrl.js" type="text/javascript"></script>
+<script src="scripts/app.core.js" type="text/javascript"></script>
 <script src="scripts/app.config.js" type="text/javascript"></script>
 <!-- endangular -->
         <!-- endbuild -->
