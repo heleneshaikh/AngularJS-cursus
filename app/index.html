@@ -19,42 +19,7 @@
 
   <body ng-controller="appCtrl as appCtrl">
    <div class="container">
-     <h1 class="page-header">Demo app + {{ ::appCtrl.ver}}</h1>
-     <p>{{ 2545 | currency }} </p>
-     <p>App ctrl: {{appCtrl.viewdata.random}}</p>
-
-
-     <div ng-controller="otherCtrl as otherCtrl">
-       <p>Child: {{otherCtrl.viewdata.random}}</p>
-
-       <button ng-click="otherCtrl.generate()" class="btn btn-primary">New random</button>
-
-       <form class="form" novalidate name="addForm" ng-submit="otherCtrl.addUser(newUser)">
-         <input type="text" class="form-control" ng-minLength="3" ng-maxLength="30" name="txtName" ng-model="newUser.name" required placeholder="Name" />
-         <input type="email" class="form-control"  name="txtEmail" ng-model="newUser.email" required placeholder="Email"/>
-         <button type="submit" class="btn btn-primary btn-block" ng-disabled="addForm.$invalid">add</button>
-         <!-- disable add button as long as email and name are $invalid -->
-       </form>
-
-       <button ng-click="otherCtrl.hideTable()" ng-class="{ 'btn-success': otherCtrl.hide, 'btn-warning': !otherCtrl.hide }" class="btn">Hide table</button>
-
-        <table class="table" ng-hide="otherCtrl.hide">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Email</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="user in otherCtrl.users">
-              <td> {{ $index + 1 }}</td> <!-- from ng-repeat: $odd, $even, $first, etc-->
-              <td> {{ user.name | uppercase }}</td>
-              <td> {{ user.email }}</td>
-            </tr>
-          </tbody>
-        </table>
-     </div>
+     <ng-view></ng-view>
    </div>
 
 
